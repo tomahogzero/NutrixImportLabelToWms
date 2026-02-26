@@ -1,0 +1,45 @@
+<UserControl x:Class="NutrixSyncLabelToWms.App.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <TextBlock Text="Settings" FontSize="28" FontWeight="SemiBold" Margin="0 0 0 12" />
+
+            <Border Background="White" CornerRadius="8" Padding="16" Margin="0 0 0 10">
+                <StackPanel>
+                    <TextBlock Text="Epicor" FontSize="18" FontWeight="SemiBold" Margin="0 0 0 8" />
+                    <TextBox Text="{Binding Settings.Epicor.BaseUrl}" Margin="0 0 0 8" ToolTip="BaseUrl"/>
+                    <WrapPanel>
+                        <TextBox Width="130" Text="{Binding Settings.Epicor.Company}" Margin="0 0 8 8" ToolTip="Company"/>
+                        <TextBox Width="130" Text="{Binding Settings.Epicor.Plant}" Margin="0 0 8 8" ToolTip="Plant"/>
+                        <TextBox Width="130" Text="{Binding Settings.Epicor.WarehouseCode}" Margin="0 0 8 8" ToolTip="Warehouse"/>
+                    </WrapPanel>
+                    <TextBox Text="{Binding Settings.Epicor.XApiKey}" Margin="0 0 0 8" ToolTip="X-API-Key"/>
+                    <WrapPanel>
+                        <TextBox Width="220" Text="{Binding Settings.Epicor.Username}" Margin="0 0 8 8" ToolTip="Username"/>
+                        <PasswordBox x:Name="Pwd" Width="220" PasswordChanged="OnPasswordChanged" />
+                    </WrapPanel>
+                </StackPanel>
+            </Border>
+
+            <Border Background="White" CornerRadius="8" Padding="16" Margin="0 0 0 10">
+                <StackPanel>
+                    <TextBlock Text="SQL Server" FontSize="18" FontWeight="SemiBold" Margin="0 0 0 8" />
+                    <TextBox Text="{Binding Settings.Sql.ConnectionString}" AcceptsReturn="True" Height="80" TextWrapping="Wrap"/>
+                </StackPanel>
+            </Border>
+
+            <WrapPanel>
+                <Button Content="Save" Command="{Binding SaveCommand}" Width="120" Margin="0 0 8 0"/>
+                <Button Content="Reload" Command="{Binding ReloadCommand}" Width="120" Margin="0 0 8 0"/>
+                <Button Content="Test Epicor" Command="{Binding TestEpicorCommand}" Width="140" Margin="0 0 8 0"/>
+                <Button Content="Test SQL" Command="{Binding TestSqlCommand}" Width="120"/>
+            </WrapPanel>
+
+            <TextBlock Text="{Binding Message}" Margin="0 12 0 0" FontWeight="SemiBold"/>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

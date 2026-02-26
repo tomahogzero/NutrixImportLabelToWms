@@ -1,0 +1,61 @@
+<UserControl x:Class="NutrixSyncLabelToWms.App.Views.ScanView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <TextBlock Text="Scan QR Label" FontSize="28" FontWeight="SemiBold" Margin="0 0 0 14" />
+
+            <Border Background="White" CornerRadius="8" Padding="16" Margin="0 0 0 14">
+                <StackPanel>
+                    <TextBlock Text="QR Input" FontWeight="Bold" />
+                    <TextBox Text="{Binding QrInput, UpdateSourceTrigger=PropertyChanged}" MinHeight="42" Margin="0 8 0 10" />
+                    <StackPanel Orientation="Horizontal">
+                        <Button Content="Parse" Command="{Binding ParseCommand}" Width="120" Margin="0 0 8 0" />
+                        <Button Content="Validate" Command="{Binding ValidateCommand}" Width="120" Margin="0 0 8 0" />
+                        <Button Content="Save" Command="{Binding SaveCommand}" Width="120" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" Background="White" CornerRadius="8" Padding="16" Margin="0 0 8 0">
+                    <StackPanel>
+                        <TextBlock Text="Parsed Fields" FontSize="18" FontWeight="SemiBold" Margin="0 0 0 8" />
+                        <TextBlock Text="PartNum" FontWeight="Bold" /><TextBlock Text="{Binding Payload.PartNum}" Margin="0 0 0 6"/>
+                        <TextBlock Text="LotNum" FontWeight="Bold" /><TextBlock Text="{Binding Payload.LotNum}" Margin="0 0 0 6"/>
+                        <TextBlock Text="Qty" FontWeight="Bold" /><TextBlock Text="{Binding Payload.Qty}" Margin="0 0 0 6"/>
+                        <TextBlock Text="UOM" FontWeight="Bold" /><TextBlock Text="{Binding Payload.Uom}" Margin="0 0 0 6"/>
+                        <TextBlock Text="ExpireDate" FontWeight="Bold" /><TextBlock Text="{Binding Payload.ExpireDate}" Margin="0 0 0 6"/>
+                        <TextBlock Text="ReceiveDate" FontWeight="Bold" /><TextBlock Text="{Binding Payload.ReceiveDate}" />
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="1" Background="White" CornerRadius="8" Padding="16" Margin="8 0 0 0">
+                    <StackPanel>
+                        <TextBlock Text="Epicor Validation" FontSize="18" FontWeight="SemiBold" Margin="0 0 0 8" />
+                        <TextBlock Text="Status" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding ValidationResult.Status}" FontSize="22" FontWeight="Bold" Margin="0 0 0 6"/>
+                        <TextBlock Text="Reason" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding ValidationResult.Message}" Margin="0 0 0 6"/>
+                        <TextBlock Text="Matched Rows" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding ValidationResult.MatchedRowsCount}" Margin="0 0 0 6"/>
+                        <TextBlock Text="Label Qty vs OnHand Qty" FontWeight="Bold"/>
+                        <TextBlock Margin="0 0 0 6">
+                            <Run Text="Label="/><Run Text="{Binding ValidationResult.LabelQty}"/><Run Text=" | OnHand="/><Run Text="{Binding ValidationResult.QtyOnHand}"/>
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <TextBlock Text="{Binding StatusMessage}" Margin="0 14 0 0" FontWeight="SemiBold" />
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
