@@ -4,8 +4,8 @@
                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                  xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-                 xmlns:vm="clr-namespace:NutrixSyncLabelToWms.App.ViewModels"
-                 xmlns:views="clr-namespace:NutrixSyncLabelToWms.App.Views"
+                 xmlns:vm="clr-namespace:NutrixSyncLabelToWms.App.ViewModels;assembly=NutrixSyncLabelToWms.App"
+                 xmlns:views="clr-namespace:NutrixSyncLabelToWms.App.Views;assembly=NutrixSyncLabelToWms.App"
                  mc:Ignorable="d"
                  Title="Nutrix Sync Label to WMS" Height="780" Width="1280" WindowStartupLocation="CenterScreen">
     <mah:MetroWindow.Resources>

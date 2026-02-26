@@ -84,7 +84,12 @@ ORDER BY ScanAt DESC";
     {
         try
         {
-            using var conn = CreateConnection();
+            await using var conn = new SqlConnection(_settingsAccessor().Sql.ConnectionString);
+            if (string.IsNullOrWhiteSpace(conn.ConnectionString))
+            {
+                throw new InvalidOperationException("ยังไม่ได้ตั้งค่า SQL ConnectionString");
+            }
+
             await conn.OpenAsync(ct);
             await conn.ExecuteScalarAsync<int>(new CommandDefinition("SELECT 1", cancellationToken: ct));
             return (true, "เชื่อมต่อ SQL Server สำเร็จ");

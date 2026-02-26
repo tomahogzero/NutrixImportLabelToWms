@@ -5,6 +5,8 @@
     <UseWPF>true</UseWPF>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>NutrixSyncLabelToWms.App</RootNamespace>
+    <AssemblyName>NutrixSyncLabelToWms.App</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="../NutrixSyncLabelToWms.Core/NutrixSyncLabelToWms.Core.csproj" />
