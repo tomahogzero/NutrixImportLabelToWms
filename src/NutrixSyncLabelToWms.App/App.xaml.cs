@@ -1,4 +1,4 @@
-using System.Net;
+using System;
 using System.Windows;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,7 +13,7 @@ namespace NutrixSyncLabelToWms.App;
 public partial class App : Application
 {
     public static IServiceProvider Services { get; private set; } = default!;
-    private static UserSettings _cachedSettings = new();
+    private static UserSettings _cachedSettings = new UserSettings();
 
     protected override async void OnStartup(StartupEventArgs e)
     {
@@ -37,8 +37,6 @@ public partial class App : Application
         sc.AddHttpClient<IEpicorBaqClient, EpicorBaqClient>(client =>
         {
             client.Timeout = TimeSpan.FromSeconds(20);
-            client.DefaultRequestVersion = HttpVersion.Version20;
-            client.DefaultVersionPolicy = HttpVersionPolicy.RequestVersionOrHigher;
         });
 
         sc.AddSingleton<IValidationService, ValidationService>();

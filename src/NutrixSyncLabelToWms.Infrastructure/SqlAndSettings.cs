@@ -84,15 +84,17 @@ ORDER BY ScanAt DESC";
     {
         try
         {
-            await using var conn = new SqlConnection(_settingsAccessor().Sql.ConnectionString);
+            using (var conn = new SqlConnection(_settingsAccessor().Sql.ConnectionString))
+            {
             if (string.IsNullOrWhiteSpace(conn.ConnectionString))
             {
                 throw new InvalidOperationException("ยังไม่ได้ตั้งค่า SQL ConnectionString");
             }
 
-            await conn.OpenAsync(ct);
-            await conn.ExecuteScalarAsync<int>(new CommandDefinition("SELECT 1", cancellationToken: ct));
-            return (true, "เชื่อมต่อ SQL Server สำเร็จ");
+                await conn.OpenAsync(ct);
+                await conn.ExecuteScalarAsync<int>(new CommandDefinition("SELECT 1", cancellationToken: ct));
+                return (true, "เชื่อมต่อ SQL Server สำเร็จ");
+            }
         }
         catch (Exception ex)
         {
@@ -120,7 +122,7 @@ public sealed class JsonUserSettingsStore : IUserSettingsStore
         var defaults = _configuration.GetSection("Defaults").Get<UserSettings>() ?? new UserSettings();
         if (!File.Exists(_filePath)) return defaults;
 
-        await using var fs = File.OpenRead(_filePath);
+        using var fs = File.OpenRead(_filePath);
         var user = await JsonSerializer.DeserializeAsync<UserSettings>(fs, cancellationToken: ct) ?? new UserSettings();
 
         user.Epicor.BaseUrl = string.IsNullOrWhiteSpace(user.Epicor.BaseUrl) ? defaults.Epicor.BaseUrl : user.Epicor.BaseUrl;
@@ -132,7 +134,7 @@ public sealed class JsonUserSettingsStore : IUserSettingsStore
 
     public async Task SaveAsync(UserSettings settings, CancellationToken ct = default)
     {
-        await using var fs = File.Create(_filePath);
+        using var fs = File.Create(_filePath);
         await JsonSerializer.SerializeAsync(fs, settings, new JsonSerializerOptions { WriteIndented = true }, ct);
     }
 }

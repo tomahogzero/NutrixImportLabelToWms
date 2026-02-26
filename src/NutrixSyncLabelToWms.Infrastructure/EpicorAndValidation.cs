@@ -38,7 +38,7 @@ public sealed class EpicorBaqClient : IEpicorBaqClient
         AddHeaders(req, ep);
 
         using var res = await _httpClient.SendAsync(req, ct);
-        var rawJson = await res.Content.ReadAsStringAsync(ct);
+        var rawJson = await res.Content.ReadAsStringAsync();
         if (!res.IsSuccessStatusCode)
         {
             var msg = BuildHttpErrorMessage(res.StatusCode, rawJson);
@@ -89,7 +89,7 @@ public sealed class EpicorBaqClient : IEpicorBaqClient
         }
     }
 
-    private static string Escape(string input) => input.Replace("'", "''", StringComparison.Ordinal);
+    private static string Escape(string input) => input.Replace("'", "''");
 
     private static void AddHeaders(HttpRequestMessage req, EpicorSettings ep)
     {

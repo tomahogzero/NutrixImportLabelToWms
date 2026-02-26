@@ -1,6 +1,6 @@
 # Nutrix Sync Label to WMS
 
-แอปเดสก์ท็อป WPF (.NET 8) สำหรับสแกน QR จากฉลาก, parse ข้อมูล, validate กับ Epicor BAQ OData (Basic Auth + headers), และบันทึกผลลง SQL Server พร้อมหน้าประวัติการสแกน
+แอปเดสก์ท็อป WPF (.NET Framework 4.7.2) สำหรับสแกน QR จากฉลาก, parse ข้อมูล, validate กับ Epicor BAQ OData (Basic Auth + headers), และบันทึกผลลง SQL Server พร้อมหน้าประวัติการสแกน
 
 ## โครงสร้างโปรเจกต์
 
@@ -61,7 +61,7 @@ filter ตัวอย่าง:
 2. key=value หรือ key:value แยกด้วย `; | newline`
 3. regex fallback (Part/Lot/Qty/UOM)
 
-## การใช้งานใน Visual Studio 2022
+## การใช้งานใน Visual Studio 2022 (.NET Framework 4.7.2)
 
 1. เปิดไฟล์ `NutrixSyncLabelToWms.sln`
 2. Restore NuGet packages

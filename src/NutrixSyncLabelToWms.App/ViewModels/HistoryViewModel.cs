@@ -7,7 +7,7 @@ public sealed class HistoryViewModel : ObservableObject
 {
     private readonly IScanRepository _repo;
 
-    public ObservableCollection<ScanTransaction> Items { get; } = [];
+    public ObservableCollection<ScanTransaction> Items { get; } = new ObservableCollection<ScanTransaction>();
 
     public DateTime? DateFrom { get; set; }
     public DateTime? DateTo { get; set; }
