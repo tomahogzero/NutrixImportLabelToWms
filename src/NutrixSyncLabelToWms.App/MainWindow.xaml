@@ -1,0 +1,42 @@
+<mah:MetroWindow x:Class="NutrixSyncLabelToWms.App.MainWindow"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+                 xmlns:vm="clr-namespace:NutrixSyncLabelToWms.App.ViewModels;assembly=NutrixSyncLabelToWms.App"
+                 xmlns:views="clr-namespace:NutrixSyncLabelToWms.App.Views;assembly=NutrixSyncLabelToWms.App"
+                 mc:Ignorable="d"
+                 Title="Nutrix Sync Label to WMS" Height="780" Width="1280" WindowStartupLocation="CenterScreen">
+    <mah:MetroWindow.Resources>
+        <DataTemplate DataType="{x:Type vm:ScanViewModel}">
+            <views:ScanView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:HistoryViewModel}">
+            <views:HistoryView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:SettingsViewModel}">
+            <views:SettingsView />
+        </DataTemplate>
+    </mah:MetroWindow.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Border Background="#0F172A" Padding="12">
+            <StackPanel>
+                <TextBlock Text="Nutrix Sync" Foreground="White" FontSize="22" FontWeight="Bold" Margin="8 8 8 18" />
+                <Button Content="Scan" Command="{Binding ShowScanCommand}" Margin="6" Height="44" />
+                <Button Content="History" Command="{Binding ShowHistoryCommand}" Margin="6" Height="44" />
+                <Button Content="Settings" Command="{Binding ShowSettingsCommand}" Margin="6" Height="44" />
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Column="1" Padding="18" Background="#F7FAFC">
+            <ContentControl Content="{Binding CurrentView}" />
+        </Border>
+    </Grid>
+</mah:MetroWindow>

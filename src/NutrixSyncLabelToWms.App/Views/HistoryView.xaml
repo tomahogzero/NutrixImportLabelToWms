@@ -1,0 +1,38 @@
+<UserControl x:Class="NutrixSyncLabelToWms.App.Views.HistoryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d">
+    <StackPanel>
+        <TextBlock Text="History" FontSize="28" FontWeight="SemiBold" Margin="0 0 0 14" />
+
+        <WrapPanel Margin="0 0 0 12">
+            <DatePicker SelectedDate="{Binding DateFrom}" Margin="0 0 8 0" />
+            <DatePicker SelectedDate="{Binding DateTo}" Margin="0 0 8 0" />
+            <TextBox Width="160" Text="{Binding PartNum}" Margin="0 0 8 0" ToolTip="PartNum" />
+            <TextBox Width="180" Text="{Binding LotNum}" Margin="0 0 8 0" ToolTip="LotNum" />
+            <ComboBox Width="120" SelectedValue="{Binding Status}" Margin="0 0 8 0">
+                <ComboBoxItem Content="" />
+                <ComboBoxItem Content="PASS" />
+                <ComboBoxItem Content="FAIL" />
+            </ComboBox>
+            <Button Content="Search" Command="{Binding SearchCommand}" Width="100" />
+        </WrapPanel>
+
+        <DataGrid ItemsSource="{Binding Items}" AutoGenerateColumns="False" Height="520">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ScanAt" Binding="{Binding ScanAt}" Width="160"/>
+                <DataGridTextColumn Header="Plant" Binding="{Binding Plant}" Width="80"/>
+                <DataGridTextColumn Header="PartNum" Binding="{Binding PartNum}" Width="160"/>
+                <DataGridTextColumn Header="LotNum" Binding="{Binding LotNum}" Width="180"/>
+                <DataGridTextColumn Header="QtyLabel" Binding="{Binding QtyLabel}" Width="90"/>
+                <DataGridTextColumn Header="QtyOnHand" Binding="{Binding QtyOnHand}" Width="90"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding ValidationStatus}" Width="90"/>
+                <DataGridTextColumn Header="Message" Binding="{Binding ValidationMessage}" Width="200"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <TextBlock Text="{Binding Message}" Margin="0 8 0 0"/>
+    </StackPanel>
+</UserControl>
